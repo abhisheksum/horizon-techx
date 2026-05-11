@@ -1,0 +1,57 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class AIChatBot {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Knowledge Base
+        Map<String, String> responses = new HashMap<>();
+
+        responses.put("hello", "Hello! How can I help you?");
+        responses.put("hi", "Hi there! Nice to meet you.");
+        responses.put("how are you", "I am functioning perfectly!");
+        responses.put("what is your name", "I am a Java AI Chatbot.");
+        responses.put("who created you", "I was created using Java programming.");
+        responses.put("bye", "Goodbye! Have a great day.");
+        responses.put("java", "Java is an object-oriented programming language.");
+        responses.put("ai", "Artificial Intelligence enables machines to think and learn.");
+
+        System.out.println("===== AI CHATBOT =====");
+        System.out.println("Type 'bye' to exit.\n");
+
+        while (true) {
+
+            System.out.print("You: ");
+            String userInput = sc.nextLine().toLowerCase().trim();
+
+            boolean found = false;
+
+            // Rule-Based Matching
+            for (String key : responses.keySet()) {
+
+                if (userInput.contains(key)) {
+
+                    System.out.println("Bot: " + responses.get(key));
+                    found = true;
+
+                    // Exit condition
+                    if (key.equals("bye")) {
+                        sc.close();
+                        return;
+                    }
+
+                    break;
+                }
+            }
+
+            // Default response
+            if (!found) {
+                System.out.println("Bot: Sorry, I don't understand that.");
+            }
+        }
+    }
+}
